@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +20,8 @@ public class Post {
     private Long id;
 
     private String title;
+
+    private LocalDateTime createAt;
 
     @Column(length = 2048)
     private String description;
@@ -32,6 +37,9 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
+
     private int viewCount;
     private int likeCount;
     private int commentCount;
@@ -40,5 +48,9 @@ public class Post {
         this.account = account;
         this.account.getPosts().add(this);
         return this;
+    }
+
+    public void addViews() {
+        this.viewCount++;
     }
 }
