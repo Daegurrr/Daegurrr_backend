@@ -6,6 +6,7 @@ import com.daegurrr.daefree.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,16 @@ public class PostController {
     @Operation(summary = "게시글 한개 조회 API")
     public ResponseEntity<PostResponse.Detail> getDetail(@PathVariable("postId") Long postId) {
         return ResponseEntity.ok().body(postService.getDetail(postId));
+    }
+
+    @PostMapping("{postId}/comment")
+    @Operation(summary = "게시글 댓글 작성")
+    public ResponseEntity<String> createComment(@PathVariable("postId") Long postId,
+                                                             @RequestBody PostRequest.CreateComment request,
+                                                             Authentication authentication) {
+        postService.createComment(postId,
+                                  request.getComment(),
+                                  Long.valueOf(authentication.getName()));
+        return ResponseEntity.ok().body("댓글이 등록되었습니다.");
     }
 }

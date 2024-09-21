@@ -33,4 +33,10 @@ public class PostRequest {
                     .build();
         }
     }
+
+    @Getter
+    public static class CreateComment {
+        private String comment;
+
+    }
 }

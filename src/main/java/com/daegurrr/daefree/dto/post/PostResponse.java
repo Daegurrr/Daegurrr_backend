@@ -56,7 +56,7 @@ public class PostResponse {
 
             public static CommentInfo from(Comment comment){
                 return CommentInfo.builder()
-                        .name(comment.getUsername())
+                        .name(comment.getAuthor())
                         .profileUrl(comment.getProfileUrl())
                         .comment(comment.getContent())
                         .build();
