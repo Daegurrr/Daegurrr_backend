@@ -1,9 +1,9 @@
 package com.daegurrr.daefree.service;
 
-import com.daegurrr.daefree.dto.HeatWaveShelterResponse;
-import com.daegurrr.daefree.dto.RequestPayload;
-import com.daegurrr.daefree.dto.SafeKoreaResponse;
-import com.daegurrr.daefree.dto.SearchResponse;
+import com.daegurrr.daefree.dto.shelter.HeatWaveShelterResponse;
+import com.daegurrr.daefree.dto.shelter.RequestPayload;
+import com.daegurrr.daefree.dto.shelter.SafeKoreaResponse;
+import com.daegurrr.daefree.dto.shelter.ShelterResponse;
 import com.daegurrr.daefree.entity.AreaCode;
 import com.daegurrr.daefree.entity.HeatWaveShelter;
 import com.daegurrr.daefree.repository.AreaCodeRepository;
@@ -24,7 +24,7 @@ import static java.lang.Thread.sleep;
 
 @Service
 @RequiredArgsConstructor
-public class SearchServiceImpl implements SearchService {
+public class ShelterServiceImpl implements ShelterService {
     private final HeatWaveShelterRepository heatWaveShelterRepository;
     private final AreaCodeRepository areaCodeRepository;
     private final ObjectMapper objectMapper;
@@ -33,17 +33,17 @@ public class SearchServiceImpl implements SearchService {
     private String serviceKey;
 
     @Override
-    public List<SearchResponse.Position> searchByType(String restType) {
+    public List<ShelterResponse.Position> searchByType(String restType) {
         return heatWaveShelterRepository.findByRestType(restType);
     }
 
     @Override
-    public SearchResponse.Detail searchDetailByPosition(Long id) {
+    public ShelterResponse.Detail searchDetailByPosition(Long id) {
         return heatWaveShelterRepository.findDetailById(id);
     }
 
     @Override
-    public List<SearchResponse.Detail> searchNearbyDetails(Double latitude, Double longitude) {
+    public List<ShelterResponse.Detail> searchNearbyDetails(Double latitude, Double longitude) {
         return heatWaveShelterRepository.findSheltersWithinRadius(latitude, longitude, 500);
     }
 
