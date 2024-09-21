@@ -47,35 +47,6 @@ public class SearchServiceImpl implements SearchService {
         return heatWaveShelterRepository.findSheltersWithinRadius(latitude, longitude, 500);
     }
 
-
-//    @Override
-//    public SafeKoreaResponse.Result search3() {
-//        String url = "https://www.safekorea.go.kr/idsiSFK/sfk/cs/sfc/selectHtwRstrList.do";
-//        RequestPayload requestPayload = RequestPayload.builder()
-//                .searchInfo(RequestPayload.SearchInfo.builder()
-//                        .pageIndex(1)
-//                        .pageUnit("1")
-//                        .pageSize("1")
-//                        .firstIndex("1")
-//                        .lastIndex("1")
-//                        .recordCountPerPage("1")
-//                        .q_area_cd_1("27")
-//                        .searchYear("2024")
-//                        .govAreaCode("27")
-//                        .searchGb("pageSearch")
-//                        .build())
-//                .build();
-//        WebClient webClient = WebClient.create(url);
-//        SafeKoreaResponse.Result result = webClient.post()
-//                .header("Content-Type", "application/json")
-//                .header("Accept", "application/json")
-//                .bodyValue(requestPayload)
-//                .retrieve()
-//                .bodyToMono(SafeKoreaResponse.class)
-//                .block().getResult();
-//        return result;
-//    }
-
     @Override
     public void saveTest(int pageSize) throws URISyntaxException, JsonProcessingException, InterruptedException {
         List<HeatWaveShelter> heatWaveShelters = new ArrayList<>();
