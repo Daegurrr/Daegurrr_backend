@@ -20,6 +20,8 @@ import java.nio.charset.StandardCharsets;
 @Service
 @RequiredArgsConstructor
 public class OAuthService {
+    private final AccountRepository accountRepository;
+    private final JwtManager jwtManager;
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${oauth2.kakao.client-id}")
@@ -38,8 +40,16 @@ public class OAuthService {
         KakaoToken kakaoToken = getKakaoToken(decode);
         KakaoUserInfo kakaoUserInfo = getKakaoUserInfo(kakaoToken.getAccess_token());
 
+        Account account = accountRepository.findById(kakaoUserInfo.getId())
+                .orElseGet(() -> accountRepository.save(kakaoUserInfo.toEntity()));
 
-        return new LoginResponse();
+        String jwt = jwtManager.issueToken(account.getId());
+        return LoginResponse.builder()
+                .id(account.getId())
+                .name(account.getName())
+                .profileUrl(account.getProfileUrl())
+                .accessToken(jwt)
+                .build();
     }
 
     private KakaoToken getKakaoToken(String code) {
