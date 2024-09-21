@@ -12,5 +12,5 @@ public interface ShelterService {
 
     public List<ShelterResponse.Detail> searchNearbyDetails(Double latitude, Double longitude);
 
-    public void saveTest(int pageSize) throws URISyntaxException, JsonProcessingException, InterruptedException;
+    public void saveTest() throws URISyntaxException, JsonProcessingException, InterruptedException;
 }

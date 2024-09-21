@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -32,6 +33,9 @@ public class ShelterServiceImpl implements ShelterService {
     @Value("${openapi.secret}")
     private String serviceKey;
 
+    @Value("${openapi.pageSize}")
+    private int pageSize;
+
     @Override
     public List<ShelterResponse.Position> searchByType(String restType) {
         return heatWaveShelterRepository.findByRestType(restType);
@@ -48,7 +52,8 @@ public class ShelterServiceImpl implements ShelterService {
     }
 
     @Override
-    public void saveTest(int pageSize) throws URISyntaxException, JsonProcessingException, InterruptedException {
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void saveTest() throws URISyntaxException, JsonProcessingException, InterruptedException {
         List<HeatWaveShelter> heatWaveShelters = new ArrayList<>();
         List<String> areaCodes = areaCodeRepository.findAll().stream().map(AreaCode::getAreaCode).toList();
         SafeKoreaResponse safeKoreaResponse = getShelterInfo(1, pageSize);
