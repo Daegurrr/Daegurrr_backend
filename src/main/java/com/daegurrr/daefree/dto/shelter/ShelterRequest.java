@@ -14,6 +14,7 @@ public class ShelterRequest {
     @AllArgsConstructor
     public static class Facility {
         private FacilityType facilityType;
+        private Position position;
     }
 
     @Getter

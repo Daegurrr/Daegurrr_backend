@@ -1,9 +1,6 @@
 package com.daegurrr.daefree.service;
 
-import com.daegurrr.daefree.dto.shelter.HeatWaveShelterResponse;
-import com.daegurrr.daefree.dto.shelter.RequestPayload;
-import com.daegurrr.daefree.dto.shelter.SafeKoreaResponse;
-import com.daegurrr.daefree.dto.shelter.ShelterResponse;
+import com.daegurrr.daefree.dto.shelter.*;
 import com.daegurrr.daefree.entity.AreaCode;
 import com.daegurrr.daefree.entity.HeatWaveShelter;
 import com.daegurrr.daefree.repository.AreaCodeRepository;
@@ -37,8 +34,12 @@ public class ShelterServiceImpl implements ShelterService {
     private int pageSize;
 
     @Override
-    public List<ShelterResponse.Position> searchByType(String restType) {
-        return heatWaveShelterRepository.findByRestType(restType);
+    public List<ShelterResponse.Position> searchByType(ShelterRequest.Facility shelterRequest) {
+        String restType = shelterRequest.getFacilityType().getDescription();
+        Double Latitude = shelterRequest.getPosition().getLatitude();
+        Double Longitude = shelterRequest.getPosition().getLongitude();
+        double radius = 1000.0;
+        return heatWaveShelterRepository.findByRestTypeWithinRadius(restType, Latitude, Longitude, radius);
     }
 
     @Override

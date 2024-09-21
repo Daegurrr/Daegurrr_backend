@@ -25,7 +25,7 @@ public class ShelterController {
     @PostMapping("/type")
     @Operation(summary = "쉼터 종류로 근처 무더위 쉼터를 탐색")
     public ResponseEntity<List<ShelterResponse.Position>> searchPositions(@RequestBody ShelterRequest.Facility facility) {
-        return ResponseEntity.ok().body(shelterService.searchByType(facility.getFacilityType().getDescription()));
+        return ResponseEntity.ok().body(shelterService.searchByType(facility));
     }
 
     @GetMapping("/detail/{id}")
