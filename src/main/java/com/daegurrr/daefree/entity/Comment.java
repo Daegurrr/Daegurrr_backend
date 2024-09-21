@@ -16,9 +16,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private String username;
+    private String author;
     private String profileUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 }

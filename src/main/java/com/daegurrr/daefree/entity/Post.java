@@ -53,4 +53,9 @@ public class Post {
     public void addViews() {
         this.viewCount++;
     }
+
+    public void addComments(Comment comment) {
+        this.commentCount++;
+        this.comments.add(comment);
+    }
 }
