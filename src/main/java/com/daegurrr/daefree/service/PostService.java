@@ -1,6 +1,7 @@
 package com.daegurrr.daefree.service;
 
 import com.daegurrr.daefree.dto.post.PostRequest;
+import com.daegurrr.daefree.dto.post.PostResponse;
 import com.daegurrr.daefree.entity.Account;
 import com.daegurrr.daefree.entity.Post;
 import com.daegurrr.daefree.repository.AccountRepository;
@@ -23,6 +24,14 @@ public class PostService {
                         .orElseThrow(() -> new NoSuchElementException("존재하지 않는 사용자입니다."));
         Post post = request.toEntity().setAuthor(account);
         postRepository.save(post);
+    }
+
+    @Transactional
+    public PostResponse.Detail getDetail(Long postId){
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new NoSuchElementException("존재하지 않는 게시글입니다."));
+        post.addViews();
+        return PostResponse.Detail.from(post);
     }
 
 
