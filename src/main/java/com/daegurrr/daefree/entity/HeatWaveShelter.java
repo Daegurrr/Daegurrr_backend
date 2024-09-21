@@ -1,5 +1,6 @@
 package com.daegurrr.daefree.entity;
 
+import com.daegurrr.daefree.dto.HeatWaveShelterResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,4 +31,14 @@ public class HeatWaveShelter {
     private boolean isWeekendOperation; // api
     private boolean isStayingPossible; // api
     private boolean isPublic;
+
+    public void updateAdditionalInfo(HeatWaveShelterResponse.ShelterInfo shelterInfo) {
+        this.deptName = shelterInfo.getMngdpt_nm();
+        this.deptContactNumber = shelterInfo.getMngdptCd();
+        this.operationBeginDate = shelterInfo.getOperBeginDe();
+        this.operationEndDate = shelterInfo.getOperEndDe();
+        this.isNightOperation = shelterInfo.getChckMatterNightOpnAt().equals("Y");
+        this.isWeekendOperation = shelterInfo.getChckMatterWkendHdayOpnAt().equals("Y");
+        this.isStayingPossible = shelterInfo.getChckMatterStayngPsblAt().equals("Y");
+    }
 }
