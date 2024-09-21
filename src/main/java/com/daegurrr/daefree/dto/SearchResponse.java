@@ -12,6 +12,7 @@ public class SearchResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Position {
+        private Long id;
         private Double latitude;
         private Double longitude;
     }
