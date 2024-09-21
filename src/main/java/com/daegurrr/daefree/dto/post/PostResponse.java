@@ -10,6 +10,29 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostResponse {
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class Summary {
+        private String title;
+        private String author;
+        private LocalDateTime createAt;
+        private int viewCount;
+        private int commentCount;
+
+        public static Summary from(Post post) {
+            return Summary.builder()
+                    .title(post.getTitle())
+                    .author(post.getAccount().getName())
+                    .createAt(post.getCreateAt())
+                    .viewCount(post.getViewCount())
+                    .commentCount(post.getCommentCount())
+                    .build();
+        }
+    }
+
+
     @Getter
     @Builder
     @AllArgsConstructor

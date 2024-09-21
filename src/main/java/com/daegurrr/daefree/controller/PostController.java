@@ -1,5 +1,6 @@
 package com.daegurrr.daefree.controller;
 
+import com.daegurrr.daefree.dto.PagingResponse;
 import com.daegurrr.daefree.dto.post.PostRequest;
 import com.daegurrr.daefree.dto.post.PostResponse;
 import com.daegurrr.daefree.service.PostService;
@@ -38,5 +39,14 @@ public class PostController {
                                                 Authentication authentication) {
         postService.createComment(postId, request.getComment(), authentication.getName());
         return ResponseEntity.ok().body("댓글이 등록되었습니다.");
+    }
+
+    @GetMapping
+    @Operation(summary = "게시글 목록 페이징 조회 API")
+    public ResponseEntity<PagingResponse<PostResponse.Summary>> getPosts(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size
+    ){
+        return ResponseEntity.ok().body(postService.getPosts(page, size));
     }
 }
