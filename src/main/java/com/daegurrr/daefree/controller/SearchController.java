@@ -23,7 +23,7 @@ public class SearchController {
     private final SearchService searchService;
 
     // 종류로 근처 무더위 쉼터를 탐색
-    @GetMapping("/position")
+    @PostMapping("/position")
     @Operation(summary = "쉼터 종류로 근처 무더위 쉼터를 탐색")
     public ResponseEntity<List<SearchResponse.Position>> searchPositions(@RequestBody SearchRequest.Facility facility) {
         return ResponseEntity.ok().body(searchService.searchByType(facility.getFacilityType().getDescription()));
@@ -40,7 +40,7 @@ public class SearchController {
         return ResponseEntity.ok().body(searchService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
-    @PostMapping("/test4")
+    @GetMapping("/test4")
     @Operation(summary = "테스트용 API")
     public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {
         searchService.saveTest(30);
