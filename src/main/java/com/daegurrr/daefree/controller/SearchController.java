@@ -31,4 +31,9 @@ public class SearchController {
     public ResponseEntity<SearchResponse.Detail> searchDetail(@PathVariable Long id) {
         return ResponseEntity.ok().body(searchService.searchDetailByPosition(id));
     }
+    @GetMapping("/nearby")
+    public ResponseEntity<List<SearchResponse.Detail>> searchNearByDetails(@RequestBody SearchRequest.Position position) {
+        return ResponseEntity.ok().body(searchService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
+    }
+
 }
