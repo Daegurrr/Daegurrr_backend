@@ -7,6 +7,13 @@ spring:
       path: /h2-console
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/test
+    url: jdbc:h2:mem:testdb
     username: sa
     password:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        ddl-auto: create
+  config:
+    import: "classpath:secrets.yml"
