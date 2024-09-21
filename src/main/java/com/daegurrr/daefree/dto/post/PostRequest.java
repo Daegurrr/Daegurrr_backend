@@ -1,8 +1,9 @@
 package com.daegurrr.daefree.dto.post;
 
 import com.daegurrr.daefree.entity.Post;
-import jakarta.persistence.Column;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 public class PostRequest {
 
@@ -10,7 +11,6 @@ public class PostRequest {
     public static class Create {
         private String title;
 
-        @Column(length = 2048)
         private String description;
 
         private String date;
@@ -29,6 +29,7 @@ public class PostRequest {
                     .place(place)
                     .content(content)
                     .target(target)
+                    .createAt(LocalDateTime.now())
                     .build();
         }
     }
