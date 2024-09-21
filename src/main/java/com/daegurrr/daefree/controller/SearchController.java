@@ -6,8 +6,6 @@ import com.daegurrr.daefree.dto.SearchRequest;
 import com.daegurrr.daefree.dto.SearchResponse;
 import com.daegurrr.daefree.service.SearchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,25 +34,9 @@ public class SearchController {
         return ResponseEntity.ok().body(searchService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
-
-    @GetMapping("/test")
-    public ResponseEntity<HeatWaveShelterResponse> test() throws Exception {
-        return ResponseEntity.ok().body(searchService.search());
-    }
-
-    @GetMapping("/test2")
-    public ResponseEntity<SafeKoreaResponse> test2() throws URISyntaxException {
-        return ResponseEntity.ok().body(searchService.search2());
-    }
-
-    @GetMapping("/test3")
-    public ResponseEntity<SafeKoreaResponse.Result> test3() throws URISyntaxException {
-        return ResponseEntity.ok().body(searchService.search3());
-    }
-
     @GetMapping("/test4")
-    public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException {
-        searchService.saveTest();
+    public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {
+        searchService.saveTest(30);
         return ResponseEntity.ok().build();
     }
 }
