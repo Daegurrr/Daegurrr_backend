@@ -15,6 +15,7 @@ public class PostResponse {
     @Builder
     @AllArgsConstructor
     public static class Summary {
+        private Long id;
         private String title;
         private String author;
         private String createAt;
@@ -23,6 +24,7 @@ public class PostResponse {
 
         public static Summary from(Post post) {
             return Summary.builder()
+                    .id(post.getId())
                     .title(post.getTitle())
                     .author(post.getAccount().getName())
                     .createAt(dateToString(post.getCreateAt()))
@@ -37,6 +39,7 @@ public class PostResponse {
     @Builder
     @AllArgsConstructor
     public static class Detail{
+        private Long id;
         private String title;
         private String author;
         private int viewCount;
@@ -50,6 +53,7 @@ public class PostResponse {
 
         public static Detail from(Post post) {
             return Detail.builder()
+                    .id(post.getId())
                     .title(post.getTitle())
                     .author(post.getAccount().getName())
                     .viewCount(post.getViewCount())
