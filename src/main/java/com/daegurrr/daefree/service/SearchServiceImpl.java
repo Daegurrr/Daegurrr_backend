@@ -82,7 +82,7 @@ public class SearchServiceImpl implements SearchService {
         List<String> areaCodes = areaCodeRepository.findAll().stream().map(AreaCode::getAreaCode).toList();
         SafeKoreaResponse safeKoreaResponse = getShelterInfo(1, pageSize);
         int totalPages = safeKoreaResponse.getResult().getPageSize();
-        for (int i = 0; i < totalPages - 1; i++) {
+        for (int i = 0; i < totalPages; i++) {
             for (SafeKoreaResponse.Facility facility : safeKoreaResponse.getFacilityList()) {
                 heatWaveShelters.add(HeatWaveShelter.builder()
                         .restName(facility.getFacilityName())
