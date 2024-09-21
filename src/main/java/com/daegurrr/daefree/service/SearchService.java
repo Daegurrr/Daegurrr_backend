@@ -14,11 +14,5 @@ public interface SearchService {
 
     public List<SearchResponse.Detail> searchNearbyDetails(Double latitude, Double longitude);
 
-    public HeatWaveShelterResponse search() throws URISyntaxException, JsonProcessingException;
-
-    public SafeKoreaResponse search2();
-
-    public SafeKoreaResponse.Result search3();
-
-    public void saveTest() throws URISyntaxException, JsonProcessingException;
+    public void saveTest(int pageSize) throws URISyntaxException, JsonProcessingException, InterruptedException;
 }
