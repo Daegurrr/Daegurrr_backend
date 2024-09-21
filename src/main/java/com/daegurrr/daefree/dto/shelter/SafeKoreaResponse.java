@@ -1,4 +1,4 @@
-package com.daegurrr.daefree.dto;
+package com.daegurrr.daefree.dto.shelter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
