@@ -82,9 +82,7 @@ public class SearchServiceImpl implements SearchService {
         List<String> areaCodes = areaCodeRepository.findAll().stream().map(AreaCode::getAreaCode).toList();
         SafeKoreaResponse safeKoreaResponse = getShelterInfo(1, pageSize);
         int totalPages = safeKoreaResponse.getResult().getPageSize();
-        System.out.println(totalPages);
-        totalPages = 3;
-        for (int i = 0; i < totalPages; i++) {
+        for (int i = 0; i < totalPages - 1; i++) {
             for (SafeKoreaResponse.Facility facility : safeKoreaResponse.getFacilityList()) {
                 heatWaveShelters.add(HeatWaveShelter.builder()
                         .restName(facility.getFacilityName())
@@ -110,7 +108,7 @@ public class SearchServiceImpl implements SearchService {
         }
         for (String areaCode : areaCodes) {
             HeatWaveShelterResponse heatWaveShelterResponse = getAdditionalInfo(areaCode);
-            if (heatWaveShelterResponse.getHeatWaveShelter().size() < 2) {
+            if (heatWaveShelterResponse.getHeatWaveShelter() == null) {
                 continue;
             }
             for (HeatWaveShelterResponse.ShelterInfo shelterInfo : heatWaveShelterResponse.getHeatWaveShelter().get(1).getRow()) {
@@ -137,6 +135,7 @@ public class SearchServiceImpl implements SearchService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
+        System.out.println(result);
         HeatWaveShelterResponse response = objectMapper.readValue(result, HeatWaveShelterResponse.class);
         sleep(1500);
         return response;
