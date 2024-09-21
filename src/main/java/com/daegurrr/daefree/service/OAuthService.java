@@ -1,9 +1,9 @@
 package com.daegurrr.daefree.service;
 
 import com.daegurrr.daefree.authentication.JwtManager;
-import com.daegurrr.daefree.dto.KakaoToken;
-import com.daegurrr.daefree.dto.KakaoUserInfo;
-import com.daegurrr.daefree.dto.LoginResponse;
+import com.daegurrr.daefree.dto.auth.KakaoToken;
+import com.daegurrr.daefree.dto.auth.KakaoUserInfo;
+import com.daegurrr.daefree.dto.auth.LoginResponse;
 import com.daegurrr.daefree.entity.Account;
 import com.daegurrr.daefree.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
