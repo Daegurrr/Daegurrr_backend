@@ -34,13 +34,13 @@ public class SearchController {
     public ResponseEntity<SearchResponse.Detail> searchDetail(@PathVariable Long id) {
         return ResponseEntity.ok().body(searchService.searchDetailByPosition(id));
     }
-    @GetMapping("/nearby")
+    @PostMapping("/nearby")
     @Operation(summary = "위도, 경도 기반 거리 계산으로 현재 위치 주변의 무더위 쉼터 정보 반환")
     public ResponseEntity<List<SearchResponse.Detail>> searchNearByDetails(@RequestBody SearchRequest.Position position) {
         return ResponseEntity.ok().body(searchService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
-    @GetMapping("/test4")
+    @PostMapping("/test4")
     @Operation(summary = "테스트용 API")
     public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {
         searchService.saveTest(30);

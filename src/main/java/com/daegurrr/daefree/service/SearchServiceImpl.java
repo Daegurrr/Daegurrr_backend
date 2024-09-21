@@ -106,7 +106,6 @@ public class SearchServiceImpl implements SearchService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-        System.out.println(result);
         HeatWaveShelterResponse response = objectMapper.readValue(result, HeatWaveShelterResponse.class);
         sleep(1500);
         return response;
