@@ -1,4 +1,4 @@
-package com.daegurrr.daefree.dto;
+package com.daegurrr.daefree.dto.shelter;
 
 import com.daegurrr.daefree.enumeration.FacilityType;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-public class SearchRequest {
+public class ShelterRequest {
     @Getter
     @Builder
     @NoArgsConstructor
