@@ -41,7 +41,6 @@ public class PostResponse {
         private String author;
         private LocalDateTime createAt;
         private int viewCount;
-        private int likeCount;
         private int commentCount;
         private String description;
         private String date;
@@ -56,7 +55,6 @@ public class PostResponse {
                     .author(post.getAccount().getName())
                     .createAt(post.getCreateAt())
                     .viewCount(post.getViewCount())
-                    .likeCount(post.getLikeCount())
                     .commentCount(post.getCommentCount())
                     .description(post.getDescription())
                     .date(post.getDate())

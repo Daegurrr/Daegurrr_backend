@@ -41,7 +41,6 @@ public class Post {
     private List<Comment> comments;
 
     private int viewCount;
-    private int likeCount;
     private int commentCount;
 
     public Post setAuthor(Account account) {
