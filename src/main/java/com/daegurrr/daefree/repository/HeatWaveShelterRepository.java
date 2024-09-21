@@ -27,7 +27,10 @@ public interface HeatWaveShelterRepository extends JpaRepository<HeatWaveShelter
             + "FROM HeatWaveShelter h "
             + "WHERE 6371000 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(h.latitude)) "
             + "* COS(RADIANS(h.longitude) - RADIANS(:longitude)) + "
-            + "SIN(RADIANS(:latitude)) * SIN(RADIANS(h.latitude))) <= :radius")
+            + "SIN(RADIANS(:latitude)) * SIN(RADIANS(h.latitude))) <= :radius "
+            + "ORDER BY 6371000 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(h.latitude)) "
+            + "* COS(RADIANS(h.longitude) - RADIANS(:longitude)) + "
+            + "SIN(RADIANS(:latitude)) * SIN(RADIANS(h.latitude))) ASC")
     List<ShelterResponse.Detail> findSheltersWithinRadius(
             @Param("latitude") double latitude,
             @Param("longitude") double longitude,
