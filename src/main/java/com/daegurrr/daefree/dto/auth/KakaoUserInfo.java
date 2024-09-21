@@ -1,4 +1,4 @@
-package com.daegurrr.daefree.dto;
+package com.daegurrr.daefree.dto.auth;
 
 import com.daegurrr.daefree.entity.Account;
 import lombok.Getter;

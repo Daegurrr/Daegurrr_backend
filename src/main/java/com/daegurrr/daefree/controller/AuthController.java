@@ -1,6 +1,6 @@
 package com.daegurrr.daefree.controller;
 
-import com.daegurrr.daefree.dto.LoginResponse;
+import com.daegurrr.daefree.dto.auth.LoginResponse;
 import com.daegurrr.daefree.service.OAuthService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +23,7 @@ public class AuthController {
         return ResponseEntity.ok().body(oAuthService.kakaoLogin(code));
     }
 
+    @Hidden
     @GetMapping("api/auth/test")
     @Operation(summary="인가 테스트용 API (안씀!)")
     public ResponseEntity<String> authTest(Authentication authentication){
