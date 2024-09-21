@@ -28,7 +28,6 @@ public class SearchServiceImpl implements SearchService {
     private final HeatWaveShelterRepository heatWaveShelterRepository;
     private final AreaCodeRepository areaCodeRepository;
     private final ObjectMapper objectMapper;
-    private final WebClient webClient;
 
     @Value("${openapi.secret}")
     private String serviceKey;
@@ -125,6 +124,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private HeatWaveShelterResponse getAdditionalInfo(String areaCode) throws URISyntaxException, JsonProcessingException, InterruptedException {
+        WebClient webClient = WebClient.create();
         // 싹다 URI로 인코딩 해야 정상작동 함...
         String url = "https://apis.data.go.kr/1741000/HeatWaveShelter3/getHeatWaveShelterList3?serviceKey=" +
                 serviceKey +
