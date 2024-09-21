@@ -1,5 +1,6 @@
 package com.daegurrr.daefree.service;
 
+import com.daegurrr.daefree.dto.PagingResponse;
 import com.daegurrr.daefree.dto.post.PostRequest;
 import com.daegurrr.daefree.dto.post.PostResponse;
 import com.daegurrr.daefree.entity.Account;
@@ -9,6 +10,9 @@ import com.daegurrr.daefree.repository.AccountRepository;
 import com.daegurrr.daefree.repository.CommentRepository;
 import com.daegurrr.daefree.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +56,13 @@ public class PostService {
                 .build();
         post.addComments(comment);
         commentRepository.save(comment);
+    }
+
+
+    @Transactional(readOnly = true)
+    public PagingResponse<PostResponse.Summary> getPosts(int page, int size) {
+        Page<Post> postPage = postRepository.findAll(PageRequest.of(page, size));
+        return PagingResponse.from(postPage, PostResponse.Summary::from);
     }
 
 
