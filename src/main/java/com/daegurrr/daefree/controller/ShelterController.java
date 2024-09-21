@@ -1,7 +1,7 @@
 package com.daegurrr.daefree.controller;
 
-import com.daegurrr.daefree.dto.SearchRequest;
-import com.daegurrr.daefree.dto.SearchResponse;
+import com.daegurrr.daefree.dto.shelter.ShelterRequest;
+import com.daegurrr.daefree.dto.shelter.ShelterResponse;
 import com.daegurrr.daefree.service.ShelterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,18 +23,18 @@ public class ShelterController {
     // 종류로 근처 무더위 쉼터를 탐색
     @PostMapping("/type")
     @Operation(summary = "쉼터 종류로 근처 무더위 쉼터를 탐색")
-    public ResponseEntity<List<SearchResponse.Position>> searchPositions(@RequestBody SearchRequest.Facility facility) {
+    public ResponseEntity<List<ShelterResponse.Position>> searchPositions(@RequestBody ShelterRequest.Facility facility) {
         return ResponseEntity.ok().body(shelterService.searchByType(facility.getFacilityType().getDescription()));
     }
 
     @GetMapping("/detail/{id}")
     @Operation(summary = "쉼터 id로 무더위 쉼터의 상세 정보 반환")
-    public ResponseEntity<SearchResponse.Detail> searchDetail(@PathVariable Long id) {
+    public ResponseEntity<ShelterResponse.Detail> searchDetail(@PathVariable Long id) {
         return ResponseEntity.ok().body(shelterService.searchDetailByPosition(id));
     }
     @PostMapping("/nearby")
     @Operation(summary = "위도, 경도 기반 거리 계산으로 현재 위치 주변의 무더위 쉼터 정보 반환")
-    public ResponseEntity<List<SearchResponse.Detail>> searchNearByDetails(@RequestBody SearchRequest.Position position) {
+    public ResponseEntity<List<ShelterResponse.Detail>> searchNearByDetails(@RequestBody ShelterRequest.Position position) {
         return ResponseEntity.ok().body(shelterService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 

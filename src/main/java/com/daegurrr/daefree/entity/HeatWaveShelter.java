@@ -1,6 +1,6 @@
 package com.daegurrr.daefree.entity;
 
-import com.daegurrr.daefree.dto.HeatWaveShelterResponse;
+import com.daegurrr.daefree.dto.shelter.HeatWaveShelterResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
