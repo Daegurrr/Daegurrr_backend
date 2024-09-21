@@ -39,11 +39,11 @@ public class ShelterController {
         return ResponseEntity.ok().body(shelterService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
-    @Hidden
-    @GetMapping("/test4")
-    @Operation(summary = "테스트용 API")
-    public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {
-        shelterService.saveTest(30);
-        return ResponseEntity.ok().build();
-    }
+//    @Hidden
+//    @GetMapping("/test4")
+//    @Operation(summary = "테스트용 API")
+//    public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {
+//        shelterService.saveTest();
+//        return ResponseEntity.ok().build();
+//    }
 }
