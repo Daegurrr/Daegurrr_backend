@@ -38,10 +38,10 @@ public class PostService {
     }
 
     @Transactional
-    public void createComment(Long postId, String content, Long accountId){
+    public void createComment(Long postId, String content, String accountId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NoSuchElementException("존재하지 않는 게시글입니다."));
-        Account account = accountRepository.findById(accountId)
+        Account account = accountRepository.findById(Long.valueOf(accountId))
                 .orElseThrow(() -> new NoSuchElementException("존재하지 않는 사용자입니다."));
 
         Comment comment = Comment.builder()
