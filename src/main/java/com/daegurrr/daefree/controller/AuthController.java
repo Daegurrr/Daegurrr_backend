@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Auth", description = "회원 인증(가입/로그인)관련 API")
@@ -20,6 +21,12 @@ public class AuthController {
     @GetMapping("oauth/redirect")
     public ResponseEntity<LoginResponse> googleOAuth(@RequestParam(name="code")String code){
         return ResponseEntity.ok().body(oAuthService.kakaoLogin(code));
+    }
+
+    @GetMapping("api/auth/test")
+    @Operation(summary="인가 테스트용 API (안씀!)")
+    public ResponseEntity<String> authTest(Authentication authentication){
+        return ResponseEntity.ok().body(authentication.getName());
     }
 
     @PostMapping("api/auth")

@@ -1,4 +1,4 @@
-package com.daegurrr.daefree.authentication.jwt;
+package com.daegurrr.daefree.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -19,35 +19,26 @@ import java.util.Date;
 public class JwtManager {
     @Value("${jwt.access-token-expiration}")
     private long jwtAccessExpiration;
-    @Value("${jwt.refresh-token-expiration}")
-    private long jwtRefreshExpiration;
     @Value("${jwt.secret}")
     private String jwtSecret;
 
     public String issueToken(Long id) {
         long current = System.currentTimeMillis();
         Date accessTokenExpireTime = new Date(current + jwtAccessExpiration);
-
-        String accessToken = generateToken(accessTokenExpireTime, id.toString());
-
-        return accessToken;
-    }
-
-    private String generateToken(Date expiration, String subject) {
         Key secretKey = createSignature();
 
         return Jwts.builder()
-                .setSubject(subject)
-                .setExpiration(expiration)
+                .setSubject(id.toString())
+                .setExpiration(accessTokenExpireTime)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
+
 
     public Claims validateToken(String value) {
         if (value == null || !value.startsWith("Bearer ")) {
             throw new RuntimeException("토큰이 존재하지 않거나, 유효하지 않은 형식입니다.");
         }
-        // Bearer 제거
         String token = value.substring(7);
         try {
             return Jwts.parserBuilder()

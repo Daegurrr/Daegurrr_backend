@@ -1,6 +1,6 @@
 package com.daegurrr.daefree.service;
 
-import com.daegurrr.daefree.authentication.jwt.JwtManager;
+import com.daegurrr.daefree.authentication.JwtManager;
 import com.daegurrr.daefree.dto.KakaoToken;
 import com.daegurrr.daefree.dto.KakaoUserInfo;
 import com.daegurrr.daefree.dto.LoginResponse;
