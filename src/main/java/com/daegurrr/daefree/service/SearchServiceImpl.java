@@ -110,6 +110,9 @@ public class SearchServiceImpl implements SearchService {
         }
         for (String areaCode : areaCodes) {
             HeatWaveShelterResponse heatWaveShelterResponse = getAdditionalInfo(areaCode);
+            if (heatWaveShelterResponse.getHeatWaveShelter().size() < 2) {
+                continue;
+            }
             for (HeatWaveShelterResponse.ShelterInfo shelterInfo : heatWaveShelterResponse.getHeatWaveShelter().get(1).getRow()) {
                 for (HeatWaveShelter heatWaveShelter : heatWaveShelters) {
                     if (heatWaveShelter.getLatitude() == shelterInfo.getLa()
