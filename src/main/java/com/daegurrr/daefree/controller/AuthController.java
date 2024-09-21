@@ -1,5 +1,6 @@
 package com.daegurrr.daefree.controller;
 
+import com.daegurrr.daefree.dto.auth.LoginRequest;
 import com.daegurrr.daefree.dto.auth.LoginResponse;
 import com.daegurrr.daefree.service.OAuthService;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -32,7 +33,7 @@ public class AuthController {
 
     @PostMapping("api/auth")
     @Operation(summary="OAuth 회원가입/로그인 API")
-    public ResponseEntity<LoginResponse> googleOAuthTest(@RequestBody String code){
-        return ResponseEntity.ok().body(oAuthService.kakaoLogin(code));
+    public ResponseEntity<LoginResponse> googleOAuthTest(@RequestBody LoginRequest request){
+        return ResponseEntity.ok().body(oAuthService.kakaoLogin(request.getCode()));
     }
 }
