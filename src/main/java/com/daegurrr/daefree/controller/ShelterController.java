@@ -4,6 +4,7 @@ import com.daegurrr.daefree.dto.shelter.ShelterRequest;
 import com.daegurrr.daefree.dto.shelter.ShelterResponse;
 import com.daegurrr.daefree.service.ShelterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ public class ShelterController {
         return ResponseEntity.ok().body(shelterService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
+    @Hidden
     @GetMapping("/test4")
     @Operation(summary = "테스트용 API")
     public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException, InterruptedException {

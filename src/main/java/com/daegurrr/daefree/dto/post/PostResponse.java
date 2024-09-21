@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import static com.daegurrr.daefree.utils.Formatter.dateToString;
 import java.util.List;
 
 public class PostResponse {
@@ -17,7 +17,7 @@ public class PostResponse {
     public static class Summary {
         private String title;
         private String author;
-        private LocalDateTime createAt;
+        private String createAt;
         private int viewCount;
         private int commentCount;
 
@@ -25,7 +25,7 @@ public class PostResponse {
             return Summary.builder()
                     .title(post.getTitle())
                     .author(post.getAccount().getName())
-                    .createAt(post.getCreateAt())
+                    .createAt(dateToString(post.getCreateAt()))
                     .viewCount(post.getViewCount())
                     .commentCount(post.getCommentCount())
                     .build();
@@ -39,7 +39,6 @@ public class PostResponse {
     public static class Detail{
         private String title;
         private String author;
-        private LocalDateTime createAt;
         private int viewCount;
         private int commentCount;
         private String description;
@@ -53,7 +52,6 @@ public class PostResponse {
             return Detail.builder()
                     .title(post.getTitle())
                     .author(post.getAccount().getName())
-                    .createAt(post.getCreateAt())
                     .viewCount(post.getViewCount())
                     .commentCount(post.getCommentCount())
                     .description(post.getDescription())
