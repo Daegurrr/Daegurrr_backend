@@ -36,4 +36,25 @@ public class SearchController {
         return ResponseEntity.ok().body(searchService.searchNearbyDetails(position.getLatitude(), position.getLongitude()));
     }
 
+
+    @GetMapping("/test")
+    public ResponseEntity<HeatWaveShelterResponse> test() throws Exception {
+        return ResponseEntity.ok().body(searchService.search());
+    }
+
+    @GetMapping("/test2")
+    public ResponseEntity<SafeKoreaResponse> test2() throws URISyntaxException {
+        return ResponseEntity.ok().body(searchService.search2());
+    }
+
+    @GetMapping("/test3")
+    public ResponseEntity<SafeKoreaResponse.Result> test3() throws URISyntaxException {
+        return ResponseEntity.ok().body(searchService.search3());
+    }
+
+    @GetMapping("/test4")
+    public ResponseEntity<Void> test4() throws URISyntaxException, JsonProcessingException {
+        searchService.saveTest();
+        return ResponseEntity.ok().build();
+    }
 }
